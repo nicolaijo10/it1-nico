@@ -1,0 +1,98 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    Height: 100%;
+}
+
+
+#overRamme {
+    width: 100%;
+    height: 75px;
+    background-color: rgb(163, 163, 163);
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#hoved {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-areas:
+    "ga3 ga3 ga5 ga7"
+    "ga1 ga1 ga6 ga11"
+    "ga1 ga1 ga4 ga10"
+    "ga2 ga2 ga8 ga10"
+    "ga2 ga2 ga9 ."
+    "ga2 ga2 .   ga12";
+  }
+
+  .responsive {
+    width: 100%;
+    height: auto;
+  }
+
+
+.ga1 {
+    height: 410px; 
+    grid-area: ga1; 
+}
+.ga2 { 
+    height: 50px;
+    color: white;
+    background-color: rgb(10, 171, 10);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: ga2; 
+    
+} 
+.ga3 { 
+    display: flex;
+    align-items: center;
+    grid-area: ga3; 
+}
+.ga4 { 
+    grid-area: ga4; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ga5 { grid-area: ga5; }
+.ga6 {  
+    grid-area: ga6; 
+}
+.ga7 { grid-area: ga7; }
+.ga8 { grid-area: ga8; }
+.ga9 { grid-area: ga9; }
+
+.ga10 { grid-area: ga10; }
+.ga11 { grid-area: ga11; }
+.ga12 { grid-area: ga12; }
+
+  #hoved > div {
+    border-left: 1px solid black;;
+    border-right: 1px solid black;;
+  }
+
+#tilbakeKnapp {
+    color: white;
+    background-color: rgb(1, 198, 1);
+    width: 640px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/*https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_responsive*/
+
+img {
+    width: 100%;
+    height: auto;
+}

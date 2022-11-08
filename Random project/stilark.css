@@ -1,0 +1,23 @@
+body {
+    background-color: aqua;
+}
+
+h1{
+    background-color: black;
+    color:white;
+    width: 500px;
+    padding: 20px;
+    border: 2px solid red;
+}
+
+#overskrift { /* koselig */
+    background-color: blueviolet;
+}
+
+.guleKantlinjer {
+    border: 20px solid yellow;
+}
+
+img:hover {
+    border: 100px solid pink;
+}

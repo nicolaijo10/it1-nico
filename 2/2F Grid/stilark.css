@@ -1,0 +1,53 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#hoved {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+  "ga1 ga2 ga3 ga4 ga4"
+  "ga1 ga6 ga6 ga7 ga9"
+  "ga5 ga6 ga6 ga8 ga9";
+}
+
+.ga1 { grid-area: ga1; }
+.ga2 { grid-area: ga2; }
+.ga3 { grid-area: ga3; }
+.ga4 { grid-area: ga4; }
+.ga5 { grid-area: ga5; }
+.ga6 { grid-area: ga6;
+       background:url(ezgif-1-ec427bc13a.gif)
+}
+.ga7 { grid-area: ga7; }
+.ga8 { grid-area: ga8; }
+.ga9 { grid-area: ga9; }
+
+div {
+  border: 1px black solid;
+  
+}
+
+@media screen and (max-width: 992px) {
+  body {
+    background-color: grey;
+  }
+
+  #hoved {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-areas:
+    "ga1 ga2 ga3"
+    "ga1 ga6 ga6"
+    "ga5 ga6 ga6"
+    "ga4 ga4 ga7"
+    "ga9 ga8 ."
+    "ga9 .   ."
+    ;
+  }

@@ -1,0 +1,18 @@
+h1 {
+    font-size: 6em;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    position: absolute;
+    bottom: 0;
+}
