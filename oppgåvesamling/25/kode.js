@@ -38,6 +38,6 @@ for (let i = 0; i < arrayTilfeldigeTall.length; i++) {
     sum = sum + arrayTilfeldigeTall[i];
 }
 
-let utskrift = document.getElementById("utskrift");
+let utskrift = document.getElementById("utskrift"); // Bla bla bla
 utskrift.innerHTML = "<li>Antall 10-ere: " + antallTiere; + "</li>"
 utskrift.innerHTML += "<li>Antall over 10-ere: " + antallOverTi; + "</li>"
