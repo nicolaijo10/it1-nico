@@ -10,3 +10,22 @@ function tilfeldigHilsen() {
 
 }
 
+// oppgave 11
+function arealTrekant(grunnlinje, hoyde) {
+    let areal = (grunnlinje * hoyde) / 2;
+    return areal;
+}
+
+//oppgave 12
+
+function arealRektangel(lengde, bredde) {
+    if ((lengde <= 0) || (bredde <= 0)) {
+    return "Du må oppgi positive tall for lengde og bredde.";
+}
+    if ((typeof(lengde) === "string") || (typeof(bredde) === "string")) {
+    return "Du må oppgi tall (ikke tekst).";
+}
+    let areal = lengde * bredde;
+    return areal;
+}
+
