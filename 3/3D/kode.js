@@ -29,3 +29,7 @@ function arealRektangel(lengde, bredde) {
     return areal;
 }
 
+
+
+
+
