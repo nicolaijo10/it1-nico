@@ -19,6 +19,9 @@ function skrivUt() {
     }
 }
 
+skrivUt.call();
+
+
 //Initialiserer siden med å generere nytt spørsmål
 newQuestion()
 
@@ -53,8 +56,7 @@ function whichPlace(year) {
 function whichYear(place) {
     let idx = places.indexOf(place)
     return years[idx]
-}
-
+} 
 
 function getRandomYear() {
     let randomYear = years[Math.floor(Math.random() * years.length)];
