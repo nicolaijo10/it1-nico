@@ -20,4 +20,4 @@ function registerBruker(evt) {
     //utskrift til HTML
     let ut = "<li>" + nyEpost + ", " + nyttPassord + "</li>";
     document.getElementById("utskrift").innerHTML += ut;
-}
+};
