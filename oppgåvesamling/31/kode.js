@@ -14,8 +14,58 @@ for (let j = 0; j < personData.length; j++) {
     console.log(personData[j].alder);  
 };
 
-function registrerBruker(); {
-    
 
+//Forms 3
+
+const skjema = document.getElementById("skjemaRegistrering")
+
+skjema.addEventListener("submit", registerBruker);
+
+function registerBruker(evt) {
+    evt.preventDefault();
+    let nyttNavn = document.getElementById("#inpNavn").value;
+    let nyttAlder = document.getElementById("#inpAlder").value;
+    
+    // Oppretter et objekt fra input
+    let objBruker = {
+        Navn : nyttNavn,
+        Alder : nyttAlder,
+        Aktivitet1 : nyAktivitet1,
+        Aktivitet2 : nyAktivitet2,
+        Aktivitet3 : nyAktivitet3
+    };
+    personData.push(objBruker);
+    console.log(personData); //sjekker om obj ble lagt til
+
+    //utskrift til HTML
+    let ut = "<li>" + nyttNavn + ", " + nyttAlder + "</li>";
+    document.getElementById("utskrift").innerHTML += ut;
 };
 
+
+//forms Aktiviteter
+/*
+const Aktiviteter = document.getElementById("AktivitetRegistrering")
+
+Aktiviteter.addEventListener("submit", registrerPoeng)
+
+function registrerPoeng(poengEvt) {
+    poengEvt.preventDefault();
+    let navn = document.querySelector("#navnOpptater").value;
+    let nyPoeng1 = document.querySelector("#akt1").value;
+    let nyPoeng2 = document.querySelector("#akt2").value;
+    let nyPoeng3 = document.querySelector("#akt3").value;
+
+
+};
+*/
+
+function poengRegning() {
+    let Poeng1 = personData[personNr].aktivitet1
+    let Poeng2 = personData[personNr].aktivitet2
+    let Poeng3 = personData[personNr].aktivitet3
+
+    let nyPoeng1 = document.querySelector("#akt1").value;
+    let nyPoeng2 = document.querySelector("#akt2").value;
+    let nyPoeng3 = document.querySelector("#akt3").value;
+};
