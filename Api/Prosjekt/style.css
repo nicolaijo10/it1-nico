@@ -1,3 +1,10 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  Height: 100%;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -28,3 +35,28 @@ ul {
     color: white;
     background-color: #04AA6D;
   }
+
+#overskrift {
+  display: flex;
+  justify-content: center;
+  
+}
+
+#hovedBoks1 {
+  height: 600px;
+  margin: 2%;
+  border: 1px solid rgb(0, 0, 0);
+}
+
+#testBoks {
+  width: 1430px;
+  height: 30px;
+  margin: 1%;
+  border: 1px solid rgb(0, 0, 0);
+  text-align: center;
+}
+
+#hoved {
+  display: flex;
+  justify-content: space-around;
+}
