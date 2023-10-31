@@ -142,6 +142,7 @@ print(f"{kelly.fornavn} har medlemsnummer {kelly.medlemsnummer}")
 
 '''
 
+'''
 import random
 
 class Bankkonto:
@@ -164,3 +165,5 @@ narkoman = Bankkonto(-10000, "Ronny")
 narkoman.innskudd(5000)
 
 print(f"Saldoen til {narkoman.eier} er nå: {narkoman.saldo} kr")
+'''
+
