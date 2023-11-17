@@ -1,4 +1,36 @@
 import random
+import time
+
+def printSlow(text):
+    for letter in text:
+        print(letter, end='', flush=True)
+        time.sleep(printSlow.speed)
+    print()
+
+# Lar spilleren velge tekstfart
+def chooseSpeed():
+    while True:
+        speed_choice = input("Velg tekstfart (1, 2, 3, 4, 5):")
+        if speed_choice == "1":
+            printSlow.speed = 0.1
+        elif speed_choice =="2":
+            printSlow.speed = 0.07
+        elif speed_choice == "3":
+            printSlow.speed = 0.05 
+        elif speed_choice == "4":
+            printSlow.speed = 0.03
+        elif speed_choice == "5":
+            printSlow.speed = 0.01
+        else:
+            printSlow("DU MÅ SKRIVE INN ET TALLL MELLOM 1 OG 5!!!")
+
+        printSlow("Dette er farten på teksten. Er denne farten grei? ja/nei")
+        dobbelsjekk = input()
+
+        if dobbelsjekk == "ja":
+            break
+
+chooseSpeed()  # Spør spilleren om ønsket hastighet
 
 #Karakter klasse for å definere alle de viktige variablene som er i en fight i et RPG spill
 class Character:
@@ -8,6 +40,7 @@ class Character:
         self.hp = hp
         self.mana = mana
         self.healingFlaskCount = 3
+        self.antallPauser = 2
 
     def __str__(self):
         return f"Name: {self.name}, Level: {self.level}, HP: {self.hp}, Mana: {self.mana}"
@@ -39,6 +72,9 @@ class Character:
     def is_alive(self):
         return self.hp > 0
     
+    def is_dead(self):
+        return self.hp < 1
+    
     def hit(self, damage):
         self.hp -= damage
         if self.hp < 0:
@@ -57,10 +93,19 @@ class Character:
     def use_healing_flask(self):
         if self.healingFlaskCount > 0:
             self.healingFlaskCount -= 1
-            self.heal(10)  # Juster helbredelsesmengden etter dine behov
-            print(f"{self.name} brukte en helbredelsesflaske. Nå har du {self.healingFlaskCount} flasker igjen og {self.hp} HP igjen")
+            self.heal(20)  # Juster helbredelsesmengden etter dine behov
+            printSlow(f"{self.name} brukte en helbredelsesflaske. Nå har du {self.healingFlaskCount} flasker igjen og {self.hp} HP igjen")
         else:
-            print(f"{self.name} har ingen helbredelsesflasker igjen.")
+            printSlow(f"{self.name} har ingen helbredelsesflasker igjen.")
+    
+    def taPause(self):
+        if self.antallPauser > 0:
+            self.antallPauser -= 1
+            self.heal(50)
+            printSlow(f"Nå har du {hero.hp} HP igjen.")
+        else:
+            printSlow(f"{self.name} har ingen pauser igjen.")
+        
     
     #Restarter karakteren, bruker muligens i framtiden
     def reset_character(self):
@@ -71,10 +116,10 @@ class Character:
     def cast_spell(self, spell, target):
         if self.mana >= spell["mana_cost"]:
             self.mana -= spell["mana_cost"]
-            print(f"{self.name} kaster {spell['name']} og forårsaker {spell['damage']} skade!")
+            printSlow(f"{self.name} kaster {spell['name']} og forårsaker {spell['damage']} skade!")
             target.hit(spell["damage"])  # Skaden påføres målet (bossen)
         else:
-            print(f"{self.name} har ikke nok mana til å kaste {spell['name']}.")
+            printSlow(f"{self.name} har ikke nok mana til å kaste {spell['name']}.")
 
 
 # Definer spells
@@ -89,11 +134,11 @@ spells = [fireball_spell, lightning_spell, ice_spell]
 
 
 #Første karakterer 
-hero = Character("Hero(Placeholder)", 3, 100, 250)
-print(f"All informasjon om helten: {hero}") # Skriv ut informasjon om helten, kallar __str__-metoden
+hero = Character("Hero(Placeholder)", 3, 100, 100)
+printSlow(f"All informasjon om helten: {hero}") # Skriv ut informasjon om helten, kallar __str__-metoden
 # Lagar bossen
-boss = Character("Boss(Placeholder)", 5, 210, 80)
-print(f"All informasjon om bossen: {boss}") # Skriv ut informasjon om bossen, kallar __str__-metoden
+boss = Character("Boss(Placeholder)", 5, 20, 80)
+printSlow(f"All informasjon om bossen: {boss}") # Skriv ut informasjon om bossen, kallar __str__-metoden
 print()
 
 # Gjer gjerne meir ut av delen over, der du kan sette meir avanserte verdier for helten og bossen
@@ -105,46 +150,90 @@ while hero.is_alive() and boss.is_alive():
     angrip = input("Vil du angripe, bruke en helbredelsesflaske eller kaste en spell? (angrip/helbred/spell) ")
 
     if angrip == "angrip":
-        print("Du angriper!")
+        printSlow("Du angriper!")
         print()
         boss.hit(20)
-        print(f"Bossen har {boss.get_hp()} HP igjen.")
+        printSlow(f"Bossen har {boss.get_hp()} HP igjen.")
     elif angrip == "helbred":
-        print("Du angriper ikke, og vurderer å bruke en helbredelsesflaske!")
+        printSlow("Du angriper ikke, og vurderer å bruke en helbredelsesflaske!")
         use_flask = input("Vil du bruke en helbredelsesflaske? (ja/nei) ")
         if use_flask == "ja":
             hero.use_healing_flask()
-        print()
+        print() 
     elif angrip == "spell":
-        print("Spells tilgjengelige:")
+        printSlow("Spells tilgjengelige:")
         for i, spell in enumerate(spells, 1):
-            print(f"{i}. {spell['name']} (Mana: {spell['mana_cost']}) - Skade: {spell['damage']}")
+            printSlow(f"{i}. {spell['name']} (Mana: {spell['mana_cost']}) - Skade: {spell['damage']}")
 
         spell_choice = input("Velg en spell (1, 2, 3, osv.): ")
         if spell_choice.isdigit():
             spell_choice = int(spell_choice)
             if 1 <= spell_choice <= len(spells):
                 chosen_spell = spells[spell_choice - 1]
-                hero.cast_spell(chosen_spell, boss)  # Målet er nå bossen
+                if hero.mana >= chosen_spell["mana_cost"]:
+                    hero.cast_spell(chosen_spell, boss)  # Kast spellen hvis du har nok mana
+                    printSlow(f"Din nye mana-mengde er {hero.mana}.")
+                else:
+                    printSlow("Du har ikke nok mana til å kaste denne spellen.")
             else:
-                print("Ugyldig valg.")
+                printSlow("Ugyldig valg.")
         else:
-            print("Ugyldig valg.")
+            printSlow("Ugyldig valg.")
+
     
     # Gjer det tilfeldig om bossen angrip, må ta seg ein pause, eller kanskje healer? Sistnemnte er ikkje implementert endå
     boss_angrip = random.choice([True, False])
     if boss_angrip:
-        print("Bossen angriper!")
-        hero.hit(10) # Gjer gjerne denne delen random (tilfeldig skade)
-        print(f"Du har {hero.get_hp()} HP igjen.")
+        printSlow("Bossen angriper!")
+        hero.hit(20) # Gjer gjerne denne delen random (tilfeldig skade)
+        printSlow(f"Du har {hero.get_hp()} HP igjen.")
 
-        print(f"Etter angrepet så har helten {hero.get_hp()} HP og bossen {boss.get_hp()} HP.")
+        printSlow(f"Etter angrepet så har helten {hero.get_hp()} HP og bossen {boss.get_hp()} HP.")
     else:
-        print(f"{boss.get_name()} Må ta seg ein pause.")
+        printSlow(f"{boss.get_name()} Må ta seg ein pause.")
     
     print()
 
 # Skriv ut resultatet av kampen (sidan me er ferdige med while-løkka, dvs ein av dei er døde)
 print()
-print("Kampen er over!")
-print(f"Etter kampen så har helten {hero.get_hp()} HP og bossen {boss.get_hp()} HP.")
+printSlow("Kampen er over!")
+printSlow(f"Etter kampen så har helten {hero.get_hp()} HP og bossen {boss.get_hp()} HP.")
+
+
+while hero.is_alive() and boss.is_dead():
+    valgEtterBoss = input("Vil du fortsette eller vil du ta en pause? (Du har 2 pauser igjen for i dag, å ta pause vil gi deg 50hp tilbake) (pause/fortsett)")
+
+    if valgEtterBoss == "pause":
+        hero.taPause()
+        printSlow(f"Nå har du {hero.hp} HP igjen.")
+    elif valgEtterBoss == "fortsett":
+        break  # Fortsetter spillet ved å hoppe ut av denne løkken
+
+printSlow("Etter pausen, forsetter helten framover i fangehullet for å se etter mulige fanger")
+printSlow("Mens helten ser rundt så oppdager han et rom med en kiste, kisten kan inneholde dyrebare ressurser, men døren inn til kisten har en stor felle på gulvet forran seg,")
+printSlow("Helten kan prøve å avvæpne fellen, men det er en sjanse for at fellen går av og helten vet ikke hva den vil gjøre")
+
+felleSvar = input("Vil du prøve å avæpne fellen? (ja/nei)")
+
+if felleSvar == "ja":
+    avæpneSuksess = random.choice([True, False])
+    if avæpneSuksess:
+        printSlow("Du klarte å avæpne den og kan fortsette til kisten")
+        hero.healingFlaskCount += 1
+        printSlow(f"Kisten inneholer en healing potion!! Nå har du {hero.healingFlaskCount} flasker igjen")
+
+    else:
+        printSlow("Du feilet på å avæpne kisten og utløste en pil felle som skyter på deg og gjør 20 damage, men du fikk i hvertfall forsatt kisten")
+        hero.hit(20)
+        hero.healingFlaskCount += 1
+        printSlow(f"Kisten inneholer en healing potion!! Nå har du {hero.healingFlaskCount} flasker igjen ")
+
+    print()
+        
+
+elif felleSvar == "nei":
+    printSlow("du fortsetter videre som om ingenting var der")
+
+else:
+    printSlow("du må svare med ja eler nei!!!!!")
+        
