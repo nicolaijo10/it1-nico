@@ -130,14 +130,27 @@ ice_spell = {"name": "Ice", "mana_cost": 20, "damage": 30}
 # Legg spells i en liste
 spells = [fireball_spell, lightning_spell, ice_spell]
 
+inventar = []
 
+def legg_til_i_inventar(item):
+    inventar.append(item)
+    printSlow(f"Du har lagt til {item} i inventaret ditt.")
+
+# Sjekker om spesifikke elementer er i inventaret før kampen starter
+if "den gamle boken" in inventar:
+    printSlow("Du har 'den gamle boken' i inventaret ditt. Den kan gi deg spesielle kunnskaper i kampen!")
+    
+
+if "den magiske amuletten" in inventar:
+    printSlow("Du har 'den magiske amuletten' i inventaret ditt. Den kan gi deg spesielle krefter i kampen!")
+    
 
 
 #Første karakterer 
 hero = Character("Hero(Placeholder)", 3, 100, 100)
 printSlow(f"All informasjon om helten: {hero}") # Skriv ut informasjon om helten, kallar __str__-metoden
 # Lagar bossen
-boss = Character("Boss(Placeholder)", 5, 20, 80)
+boss = Character("Boss(Placeholder)", 5, 20, 0)
 printSlow(f"All informasjon om bossen: {boss}") # Skriv ut informasjon om bossen, kallar __str__-metoden
 print()
 
@@ -223,7 +236,7 @@ if felleSvar == "ja":
         printSlow(f"Kisten inneholer en healing potion!! Nå har du {hero.healingFlaskCount} flasker igjen")
 
     else:
-        printSlow("Du feilet på å avæpne kisten og utløste en pil felle som skyter på deg og gjør 20 damage, men du fikk i hvertfall forsatt kisten")
+        printSlow("Du feilet på å avæpne kisten og utløste en pil felle som skyter på deg, den treffer armen din og gjør 20 damage, men du fikk i hvertfall forsatt kisten")
         hero.hit(20)
         hero.healingFlaskCount += 1
         printSlow(f"Kisten inneholer en healing potion!! Nå har du {hero.healingFlaskCount} flasker igjen ")
@@ -236,4 +249,20 @@ elif felleSvar == "nei":
 
 else:
     printSlow("du må svare med ja eler nei!!!!!")
+
+printSlow("Helten kommer til et rom fylt med magiske runer og møter en gammel trollmann.")
+printSlow("Trollmannen ser på deg og tilbyr deg en gave som kan hjelpe deg videre i reisen din.")
+
+gave_valg = input("Vil du velge 'den magiske amuletten' eller 'den gamle boken'? (amulett/bok): ")
+
+if gave_valg == "amulett":
+    printSlow("Du velger den magiske amuletten!")
+    # Kode
+    
+elif gave_valg == "bok":
+    printSlow("Du velger den gamle boken!")
+    # Kode
+    
+else:
+    printSlow("Du klarte ikke å velge og går videre uten en gave.")
         
