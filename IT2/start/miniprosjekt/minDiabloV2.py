@@ -1,5 +1,6 @@
 import random
 import time
+import mage
 
 def printSlow(text):
     for letter in text:
@@ -96,11 +97,6 @@ class Character:
         if self.hp > 100:
             self.hp = 100
 
-    def spellCast(self, cost):
-        self.mana -= cost
-        if self.mana < 0:
-            self.mana = 0
-
     def use_healing_flask(self):
         if self.healingFlaskCount > 0:
             self.healingFlaskCount -= 1
@@ -116,13 +112,6 @@ class Character:
             printSlow(f"Nå har du {hero.hp} HP igjen.")
         else:
             printSlow(f"{self.name} har ingen pauser igjen.")
-        
-    
-    #Restarter karakteren, bruker muligens i framtiden
-    def reset_character(self):
-        self.hp = 100  # Tilbakestill HP til startverdi
-        self.mana = 250  # Tilbakestill mana til startverdi
-        self.healing_flask_count = 3  # Tilbakestill flasketelleren til startverdi
 
     def cast_spell(self, spell, target):
         if self.mana >= spell["mana_cost"]:
@@ -131,6 +120,10 @@ class Character:
             target.hit(spell["damage"])  # Skaden påføres målet (bossen)
         else:
             printSlow(f"{self.name} har ikke nok mana til å kaste {spell['name']}.")
+
+        if self.mana < 0:
+            self.mana = 0
+
 
 
 #Første karakterer 
