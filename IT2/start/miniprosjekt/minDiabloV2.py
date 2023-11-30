@@ -96,7 +96,7 @@ class Character:
         if self.hp > 100:
             self.hp = 100
 
-    def cast_spell(self, cost):
+    def spellCast(self, cost):
         self.mana -= cost
         if self.mana < 0:
             self.mana = 0
