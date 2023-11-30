@@ -41,6 +41,7 @@ class Character:
         self.mana = mana
         self.healingFlaskCount = 3
         self.antallPauser = 2
+        self.AD = 20  
 
     def __str__(self):
         return f"Name: {self.name}, Level: {self.level}, HP: {self.hp}, Mana: {self.mana}"
@@ -57,6 +58,12 @@ class Character:
     def get_mana(self):
         return self.mana
     
+    def get_AD(self):
+        return self.AD
+    
+    def set_AD(self, new_AD):
+        self.AD = new_AD
+
     def set_name(self, new_name):
         self.name = new_name
 
@@ -79,6 +86,10 @@ class Character:
         self.hp -= damage
         if self.hp < 0:
             self.hp = 0
+
+    def attack(self, target):
+        target.hit(self.AD)
+        printSlow(f"{self.name} angriper og forårsaker {self.AD} skade!")
 
     def heal(self, amount):
         self.hp += amount
@@ -144,21 +155,6 @@ def legg_til_i_inventar(item):
     inventar.append(item)
     printSlow(f"Du har lagt til {item} i inventaret ditt.")
 
-# Sjekker om spesifikke elementer er i inventaret før kampen starter
-if "den gamle boken" in inventar:
-    printSlow("Du har 'den gamle boken' i inventaret ditt")
-    hero.mana = 120 
-    for spell in spells:
-        spell["damage"] += 10
-
-
-if "den magiske amuletten" in inventar:
-    printSlow("Du har 'den magiske amuletten' i inventaret ditt")
-    
-
-    
-
-
 
 # Gjer gjerne meir ut av delen over, der du kan sette meir avanserte verdier for helten og bossen
 # Kanskje du til og med kan la spelaren setje verdiane sjølv for helten (tenk "character creation")?
@@ -171,7 +167,7 @@ while hero.is_alive() and boss.is_alive():
     if angrip == "angrip":
         printSlow("Du angriper!")
         print()
-        boss.hit(20)
+        hero.attack(boss)
         printSlow(f"Bossen har {boss.get_hp()} HP igjen.")
     elif angrip == "helbred":
         printSlow("Du angriper ikke, og vurderer å bruke en helbredelsesflaske!")
@@ -263,12 +259,32 @@ gave_valg = input("Vil du velge 'den magiske amuletten' eller 'den gamle boken'?
 
 if gave_valg == "amulett":
     printSlow("Du velger den magiske amuletten!")
+    inventar.append("den magiske amuletten")
     # Kode
     
 elif gave_valg == "bok":
     printSlow("Du velger den gamle boken!")
+    inventar.append("den gamle boken")
     # Kode
     
 else:
     printSlow("Du klarte ikke å velge og går videre uten en gave.")
         
+
+# Sjekker om spesifikke elementer er i inventaret før kampen starter
+if "den gamle boken" in inventar:
+    printSlow("Den gamle boken gir deg magisk styrke, manaen din blir større, men hp'en din blir litt mindre. Spellsene dine gjør også mer damage")
+    hero.mana = 130 
+    hero.hp = 90
+    for spell in spells:
+        spell["damage"] += 10
+
+
+if "den magiske amuletten" in inventar:
+    printSlow("Den magiske amuletten gir deg fysisk styrke, manaen din blir litt mindre, men hp'en din blir større. angrepene dine gjør også mer skade")
+    hero.mana = 70 
+    hero.hp = 130
+    hero.set_AD(hero.get_AD() + 20)  # Øker AD med 20 når helten har den magiske amuletten
+
+
+printSlow(f"Elementer i inventaret nå: {inventar}")
