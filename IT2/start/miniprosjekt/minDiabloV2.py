@@ -1,6 +1,6 @@
 import random
 import time
-import mage
+
 
 def printSlow(text):
     for letter in text:
@@ -32,6 +32,8 @@ def chooseSpeed():
             break
 
 chooseSpeed()  # Spør spilleren om ønsket hastighet
+
+
 
 #Karakter klasse for å definere alle de viktige variablene som er i en fight i et RPG spill
 class Character:
@@ -124,11 +126,43 @@ class Character:
         if self.mana < 0:
             self.mana = 0
 
+class CharacterMage(Character):
+    def __init__(self, name, level, hp, mana):
+        super().__init__(name, level, hp, mana)
+        self.spell_power = 50  # Legg til en variabel for spell power
+        
+    def cast_spell(self, spell, target):
+        if self.mana >= spell["mana_cost"]:
+            self.mana -= spell["mana_cost"]
+            damage = spell["damage"] + self.spell_power  # Legg til spell power i skaden
+            printSlow(f"{self.name} kaster {spell['name']} og forårsaker {damage} skade!")
+            target.hit(damage)  # Skaden påføres målet (bossen)
+        else:
+            printSlow(f"{self.name} har ikke nok mana til å kaste {spell['name']}.")
+    
+def chooseCharacterType():
+    printSlow("Velg karaktertype:")
+    printSlow("1. Standard karakter")
+    printSlow("2. Mage karakter")
+    while True:
+        choice = input("Skriv inn valget ditt (1/2): ")
+        if choice == "1":
+            return "standard"
+        elif choice == "2":
+            return "mage"
+        else:
+            printSlow("Vennligst velg 1 for standard karakter eller 2 for mage karakter.")
 
+def createCharacter():
+    character_type = chooseCharacterType()
+    if character_type == "standard":
+        return Character("Standard Hero", 3, 100, 100)
+    elif character_type == "mage":
+        return CharacterMage("Mage Hero", 3, 100, 100)  # Pass på å opprette CharacterMage-objektet
 
-#Første karakterer 
-hero = Character("Hero(Placeholder)", 3, 100, 100)
-printSlow(f"All informasjon om helten: {hero}") # Skriv ut informasjon om helten, kallar __str__-metoden
+hero = createCharacter()
+printSlow(f"All informasjon om helten: {hero}")
+
 # Lagar bossen
 boss = Character("Boss(Placeholder)", 5, 20, 0)
 printSlow(f"All informasjon om bossen: {boss}") # Skriv ut informasjon om bossen, kallar __str__-metoden
@@ -280,4 +314,4 @@ if "den magiske amuletten" in inventar:
     hero.set_AD(hero.get_AD() + 20)  # Øker AD med 20 når helten har den magiske amuletten
 
 
-printSlow(f"Elementer i inventaret nå: {inventar}")
+printSlow(f"Elementer i inventaret nå: {inventar}") 

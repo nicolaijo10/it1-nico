@@ -1,6 +1,7 @@
 import random
 import time
 
+
 def printSlow(text):
     for letter in text:
         print(letter, end='', flush=True)
@@ -32,6 +33,8 @@ def chooseSpeed():
 
 chooseSpeed()  # Spør spilleren om ønsket hastighet
 
+
+
 #Karakter klasse for å definere alle de viktige variablene som er i en fight i et RPG spill
 class Character:
     def __init__(self, name, level, hp, mana):
@@ -41,6 +44,7 @@ class Character:
         self.mana = mana
         self.healingFlaskCount = 3
         self.antallPauser = 2
+        self.AD = 20  
 
     def __str__(self):
         return f"Name: {self.name}, Level: {self.level}, HP: {self.hp}, Mana: {self.mana}"
@@ -57,6 +61,12 @@ class Character:
     def get_mana(self):
         return self.mana
     
+    def get_AD(self):
+        return self.AD
+    
+    def set_AD(self, new_AD):
+        self.AD = new_AD
+
     def set_name(self, new_name):
         self.name = new_name
 
@@ -80,15 +90,14 @@ class Character:
         if self.hp < 0:
             self.hp = 0
 
+    def attack(self, target):
+        target.hit(self.AD)
+        printSlow(f"{self.name} angriper og forårsaker {self.AD} skade!")
+
     def heal(self, amount):
         self.hp += amount
         if self.hp > 100:
             self.hp = 100
-
-    def cast_spell(self, cost):
-        self.mana -= cost
-        if self.mana < 0:
-            self.mana = 0
 
     def use_healing_flask(self):
         if self.healingFlaskCount > 0:
@@ -105,13 +114,6 @@ class Character:
             printSlow(f"Nå har du {hero.hp} HP igjen.")
         else:
             printSlow(f"{self.name} har ingen pauser igjen.")
-        
-    
-    #Restarter karakteren, bruker muligens i framtiden
-    def reset_character(self):
-        self.hp = 100  # Tilbakestill HP til startverdi
-        self.mana = 250  # Tilbakestill mana til startverdi
-        self.healing_flask_count = 3  # Tilbakestill flasketelleren til startverdi
 
     def cast_spell(self, spell, target):
         if self.mana >= spell["mana_cost"]:
@@ -121,6 +123,50 @@ class Character:
         else:
             printSlow(f"{self.name} har ikke nok mana til å kaste {spell['name']}.")
 
+        if self.mana < 0:
+            self.mana = 0
+
+class CharacterMage(Character):
+    def __init__(self, name, level, hp, mana):
+        super().__init__(name, level, hp, mana)
+        self.spell_power = 50  # Legg til en variabel for spell power
+        
+    def cast_spell(self, spell, target):
+        if self.mana >= spell["mana_cost"]:
+            self.mana -= spell["mana_cost"]
+            damage = spell["damage"] + self.spell_power  # Legg til spell power i skaden
+            printSlow(f"{self.name} kaster {spell['name']} og forårsaker {damage} skade!")
+            target.hit(damage)  # Skaden påføres målet (bossen)
+        else:
+            printSlow(f"{self.name} har ikke nok mana til å kaste {spell['name']}.")
+    
+def chooseCharacterType():
+    printSlow("Velg karaktertype:")
+    printSlow("1. Standard karakter")
+    printSlow("2. Mage karakter")
+    while True:
+        choice = input("Skriv inn valget ditt (1/2): ")
+        if choice == "1":
+            return "standard"
+        elif choice == "2":
+            return "mage"
+        else:
+            printSlow("Vennligst velg 1 for standard karakter eller 2 for mage karakter.")
+
+def createCharacter():
+    character_type = chooseCharacterType()
+    if character_type == "standard":
+        return Character("Standard Hero", 3, 100, 100)
+    elif character_type == "mage":
+        return CharacterMage("Mage Hero", 3, 60, 250)  # Pass på å opprette CharacterMage-objektet
+
+hero = createCharacter()
+printSlow(f"All informasjon om helten: {hero}")
+
+# Lagar bossen
+boss = Character("Boss(Placeholder)", 5, 20, 0)
+printSlow(f"All informasjon om bossen: {boss}") # Skriv ut informasjon om bossen, kallar __str__-metoden
+print()
 
 # Definer spells
 fireball_spell = {"name": "Fireball", "mana_cost": 30, "damage": 40}
@@ -136,23 +182,6 @@ def legg_til_i_inventar(item):
     inventar.append(item)
     printSlow(f"Du har lagt til {item} i inventaret ditt.")
 
-# Sjekker om spesifikke elementer er i inventaret før kampen starter
-if "den gamle boken" in inventar:
-    printSlow("Du har 'den gamle boken' i inventaret ditt. Den kan gi deg spesielle kunnskaper i kampen!")
-    
-
-if "den magiske amuletten" in inventar:
-    printSlow("Du har 'den magiske amuletten' i inventaret ditt. Den kan gi deg spesielle krefter i kampen!")
-    
-
-
-#Første karakterer 
-hero = Character("Hero(Placeholder)", 3, 100, 100)
-printSlow(f"All informasjon om helten: {hero}") # Skriv ut informasjon om helten, kallar __str__-metoden
-# Lagar bossen
-boss = Character("Boss(Placeholder)", 5, 20, 0)
-printSlow(f"All informasjon om bossen: {boss}") # Skriv ut informasjon om bossen, kallar __str__-metoden
-print()
 
 # Gjer gjerne meir ut av delen over, der du kan sette meir avanserte verdier for helten og bossen
 # Kanskje du til og med kan la spelaren setje verdiane sjølv for helten (tenk "character creation")?
@@ -165,7 +194,7 @@ while hero.is_alive() and boss.is_alive():
     if angrip == "angrip":
         printSlow("Du angriper!")
         print()
-        boss.hit(20)
+        hero.attack(boss)
         printSlow(f"Bossen har {boss.get_hp()} HP igjen.")
     elif angrip == "helbred":
         printSlow("Du angriper ikke, og vurderer å bruke en helbredelsesflaske!")
@@ -257,12 +286,32 @@ gave_valg = input("Vil du velge 'den magiske amuletten' eller 'den gamle boken'?
 
 if gave_valg == "amulett":
     printSlow("Du velger den magiske amuletten!")
+    inventar.append("den magiske amuletten")
     # Kode
     
 elif gave_valg == "bok":
     printSlow("Du velger den gamle boken!")
+    inventar.append("den gamle boken")
     # Kode
     
 else:
     printSlow("Du klarte ikke å velge og går videre uten en gave.")
         
+
+# Sjekker om spesifikke elementer er i inventaret før kampen starter
+if "den gamle boken" in inventar:
+    printSlow("Den gamle boken gir deg magisk styrke, manaen din blir større, men hp'en din blir litt mindre. Spellsene dine gjør også mer damage")
+    hero.mana = 130 
+    hero.hp = 90
+    for spell in spells:
+        spell["damage"] += 10
+
+
+if "den magiske amuletten" in inventar:
+    printSlow("Den magiske amuletten gir deg fysisk styrke, manaen din blir litt mindre, men hp'en din blir større. angrepene dine gjør også mer skade")
+    hero.mana = 70 
+    hero.hp = 130
+    hero.set_AD(hero.get_AD() + 20)  # Øker AD med 20 når helten har den magiske amuletten
+
+
+printSlow(f"Elementer i inventaret nå: {inventar}") 
