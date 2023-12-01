@@ -44,7 +44,7 @@ class Character:
         self.mana = mana
         self.healingFlaskCount = 3
         self.antallPauser = 2
-        self.AD = 20  
+        self.AD = 40
 
     def __str__(self):
         return f"Name: {self.name}, Level: {self.level}, HP: {self.hp}, Mana: {self.mana}"
@@ -130,6 +130,7 @@ class CharacterMage(Character):
     def __init__(self, name, level, hp, mana):
         super().__init__(name, level, hp, mana)
         self.spell_power = 50  # Legg til en variabel for spell power
+        self.AD = 20
         
     def cast_spell(self, spell, target):
         if self.mana >= spell["mana_cost"]:
