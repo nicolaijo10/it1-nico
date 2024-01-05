@@ -304,14 +304,12 @@ else:
 
 # Sjekker om spesifikke elementer er i inventaret før kampen starter
 if "den gamle boken" in inventar:
-    printSlow("Den gamle boken gir deg magisk styrke, manaen din blir større, men hp'en din blir litt mindre. Spellsene dine gjør også mer damage")
     hero.mana += 40  # Øker mana med 40
     hero.hp -= 10  # Reduserer HP med 10
     for spell in spells:
         spell["damage"] += 30  # Øker skaden til alle spells med 30
 
 if "den magiske amuletten" in inventar:
-    printSlow("Den magiske amuletten gir deg fysisk styrke, manaen din blir litt mindre, men hp'en din blir større. angrepene dine gjør også mer skade")
     hero.mana -= 30  # Reduserer mana med 30
     hero.hp += 30  # Øker HP med 30
     hero.set_AD(hero.get_AD() + 30)  # Øker AD med 30 når helten har den magiske amuletten
