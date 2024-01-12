@@ -7,7 +7,7 @@ import math as m
 pg.init()
 
 # Oppretter et vindu der vi skal "tegne" innholdet vårt
-VINDU_BREDDE = 500
+VINDU_BREDDE = 800
 VINDU_HOYDE  = 500
 vindu = pg.display.set_mode([VINDU_BREDDE, VINDU_HOYDE])
 
@@ -113,6 +113,10 @@ while fortsett:
         # Stop the bouncing ball
         hinder.xFart = 0
         hinder.yFart = 0
+
+        if spiller.x > 800:
+           spiller.x = 800
+           
         
         
     score_text = score_font.render(f"Wall Hits: {hinder.wall_hits}", True, (0, 0, 0))
