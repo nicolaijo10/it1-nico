@@ -114,8 +114,6 @@ while fortsett:
         hinder.xFart = 0
         hinder.yFart = 0
 
-        if spiller.x > 800:
-           spiller.x = 800
            
         
         
