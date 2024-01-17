@@ -31,6 +31,7 @@ class Ball(objekter):
         self.xFart = xFart
         self.yFart = yFart
         self.nedtelling_tid = 0
+        self.PAUSE_VARIGHET = 1000  # Juster denne verdien for å endre pausens lengde
 
     def flytt(self, spiller1, spiller2):
         """Method to move the bouncing ball"""
@@ -61,7 +62,7 @@ class Ball(objekter):
         self.y = VINDU_HOYDE // 2
 
     def start_nedtelling(self):
-        self.nedtelling_tid = 60  # 60 frames tilsvarer 1 sekund
+        self.nedtelling_tid = self.PAUSE_VARIGHET  # Juster denne verdien for å endre pausens lengde
 
     def tegn_nedtelling(self):
         if self.nedtelling_tid > 0:
