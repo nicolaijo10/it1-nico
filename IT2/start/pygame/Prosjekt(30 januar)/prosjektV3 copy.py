@@ -31,7 +31,7 @@ class Ball(objekter):
         self.xFart = xFart
         self.yFart = yFart
         self.nedtelling_tid = 0
-        self.PAUSE_VARIGHET = 1000  # Juster denne verdien for å endre pausens lengde
+        self.PAUSE_VARIGHET = 300  # Juster denne verdien for å endre pausens lengde
 
     def flytt(self, spiller1, spiller2):
         """Method to move the bouncing ball"""
@@ -44,6 +44,7 @@ class Ball(objekter):
             spiller2.poeng += 1  # Øk poeng for spiller 2
             self.reset_posisjon()
             self.start_nedtelling()
+           
 
         if ((self.x + self.radius) >= self.vindusobjekt.get_width()):
             self.xFart = -self.xFart
@@ -60,6 +61,8 @@ class Ball(objekter):
     def reset_posisjon(self):
         self.x = VINDU_BREDDE // 2
         self.y = VINDU_HOYDE // 2
+        self.xFart = 2.5  # Endre tilbake til den opprinnelige farten
+        self.yFart = 2.5
 
     def start_nedtelling(self):
         self.nedtelling_tid = self.PAUSE_VARIGHET  # Juster denne verdien for å endre pausens lengde
@@ -132,12 +135,12 @@ while fortsett:
     spiller2.flytt(trykkede_taster)
 
     if spiller1.collide_with(ball):
-        ball.xFart *= -1.0
-        ball.yFart *= 1.0
+        ball.xFart *= -1.1
+        ball.yFart *= 1.1
 
     if spiller2.collide_with(ball):
-        ball.xFart *= -1.0
-        ball.yFart *= 1.0
+        ball.xFart *= -1.1
+        ball.yFart *= 1.1
 
     ball.tegn_nedtelling()  # Tegn nedtelling på toppen av skjermen
 
