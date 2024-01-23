@@ -85,10 +85,6 @@ class Spiller(objekter):
             self.y -= self.fart
         if taster[K_s]:
             self.y += self.fart
-        if taster[K_RIGHT]:
-            self.x += self.fart
-        if taster[K_LEFT]:
-            self.x -= self.fart
 
     def collide_with(self, ball):
         paddle_rect = pg.Rect(self.x, self.y, self.width, self.height)
@@ -144,8 +140,40 @@ while fortsett:
 
     ball.tegn_nedtelling()  # Tegn nedtelling på toppen av skjermen
 
-    poengtekst = score_font.render(f"Spiller 1: {spiller1.poeng}  Spiller 2: {spiller2.poeng}", True, (255, 255, 255))
-    vindu.blit(poengtekst, (VINDU_BREDDE // 2 - poengtekst.get_width() // 2, 10))
+    if spiller1.poeng < 10 and spiller2.poeng < 10:
+        poengtekst = score_font.render(f"Spiller 1: {spiller1.poeng}  Spiller 2: {spiller2.poeng}", True, (255, 255, 255))
+        vindu.blit(poengtekst, (VINDU_BREDDE // 2 - poengtekst.get_width() // 2, 10))
+
+    if spiller1.y > 890:
+        spiller1.y = 890
+    elif spiller1.y < 0:
+        spiller1.y = 0
+
+    if spiller2.y > 890:
+        spiller2.y = 890
+    elif spiller2.y < 0:
+        spiller2.y = 0
+
+    print(spiller1.y)
+
+    if spiller1.poeng == 10:
+        print("Spiller 1 vinner")
+        spiller1_win = score_font.render(f"Spiller 1 VINNER!!!", True, (0, 0, 0))
+        vindu.blit(spiller1_win, (VINDU_BREDDE // 2 - spiller1_win.get_width() // 2, 10))
+        ball.xFart *= 0
+        ball.yFart *= 0
+        spiller1.fart = 0
+        spiller2.fart = 0
+
+
+    if spiller2.poeng == 10:
+        print("Spiller 2 vinner")
+        spiller2_win = score_font.render(f"Spiller 2 VINNER!!!", True, (0, 0, 0))
+        vindu.blit(spiller2_win, (VINDU_BREDDE // 2 - spiller2_win.get_width() // 2, 10))
+        ball.xFart *= 0
+        ball.yFart *= 0
+        spiller1.fart = 0
+        spiller2.fart = 0
 
     pg.display.flip()
 
