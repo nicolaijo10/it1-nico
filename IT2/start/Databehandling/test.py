@@ -154,6 +154,8 @@ plt.pie(representanter, labels=partiforkortelser, colors=farger, labeldistance=1
 plt.show()
 
 '''
+
+'''
 import matplotlib.pyplot as plt
 
 utdanningsprogram = [
@@ -175,13 +177,14 @@ antallJenter = [352, 268, 7286, 1028, 709, 851, 243, 826, 200, 895]
 fig, ax = plt.subplots(figsize=(8, 8))
 
 labels = utdanningsprogram
-sizes = antallJenter  # Endre til antallJenter for å se fordelingen av jenter
+sizes = antallGutter  # Endre til antallJenter for å se fordelingen av jenter
 explode = (0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0)  # For å eksplodere den første sektoren (valgfritt)
 
 ax.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%', startangle=90)
 ax.axis('equal')
 
 plt.title('Fordeling av gutter etter utdanningsprogram')
-# Endre tittelen til 'Fordeling av jenter etter utdanningsprogram' for å se fordelingen av jenter
+# Endre tittelen til 'Fordeling av jenter etter utdanningsprogram'
 
 plt.show()
+'''
