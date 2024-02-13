@@ -56,7 +56,7 @@ with open(filnavn, "a") as fil:
   fil.write("Nå skal jeg bruke programmering for å lagre akkurat denne teksten i en fil.")
   '''
 
-
+'''
 import csv
 
 filnavn = "IT2/start/Databehandling/reeleDatasertttttt/Befolkning_1951-2022.csv"
@@ -69,3 +69,75 @@ with open(filnavn, encoding="utf-8-sig") as fil:
 
   for rad in filinnhold:
     print(rad)
+'''
+
+'''
+import csv
+import matplotlib.pyplot as plt
+
+filnavn = "IT2/start/Databehandling/reeleDatasertttttt/Befolkning_1951-2022.csv"
+
+# Lister for å ta vare på alle årstall og befolkningsstørrelser
+aarstall = []
+befolkning = []
+
+with open(filnavn, encoding="utf-8-sig") as fil:
+  filinnhold = csv.reader(fil, delimiter=";")
+
+  overskrifter = next(filinnhold)
+  print(overskrifter)
+  
+  for rad in filinnhold:
+    aarstall.append(int(rad[0]))
+    befolkning.append(int(rad[1]))
+
+# Tegner grafen
+plt.plot(aarstall, befolkning)
+plt.grid()
+plt.show()
+'''
+
+'''
+import json
+
+filnavn = "IT2/start/Databehandling/reeleDatasertttttt/skandinavia.json"
+
+with open(filnavn, encoding="utf-8") as fil:
+  data = json.load(fil)
+
+landene = [land["navn"] for land in data["land"]]
+print("Liste over landene i datasettet:")
+for land in landene:
+    print(land)
+
+danske_byer = None
+for land in data["land"]:
+    if land["navn"] == "Danmark":
+        danske_byer = land["byer"]
+        break
+
+if danske_byer:
+    print("Byer i Danmark:")
+    for by in danske_byer:
+        print(by)
+else:
+    print("Fant ikke informasjon om byene i Danmark i datasettet.")
+
+
+print("Liste over landene sammen med alle byene i hvert land:")
+for land in data["land"]:
+    print(land["navn"] + ":")
+    for by in land["byer"]:
+        print("- " + by)
+    print()  # legger til en tom linje mellom hvert land for bedre lesbarhet
+'''
+
+
+import json
+
+filnavn = "IT2/start/Databehandling/reeleDatasertttttt/lonnstabell.json"
+
+with open(filnavn, encoding="utf-8") as f:
+  data = json.load(f)
+
+print(data)
