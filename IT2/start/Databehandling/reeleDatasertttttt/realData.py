@@ -140,4 +140,4 @@ filnavn = "IT2/start/Databehandling/reeleDatasertttttt/lonnstabell.json"
 with open(filnavn, encoding="utf-8") as f:
   data = json.load(f)
 
-print(data)
+print(data) 
