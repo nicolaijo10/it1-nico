@@ -177,6 +177,7 @@ plt.show()
 
 #Denne kombinerer de 2 forrige og lager diagram for både alder og kjønnsgruppe
 '''
+
 import csv
 import matplotlib.pyplot as plt
 
@@ -326,6 +327,7 @@ plt.legend(loc='upper left', bbox_to_anchor=(1, 1))
 plt.show()
 '''
 
+'''
 import csv
 import matplotlib.pyplot as plt
 
@@ -363,4 +365,4 @@ plt.axis('equal')
 plt.tight_layout()
 plt.show()
 
-
+'''
