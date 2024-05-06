@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2ca6879b1afb9bd332594f3e8c2bc08f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_2ca6879b1afb9bd332594f3e8c2bc08f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_2ca6879b1afb9bd332594f3e8c2bc08f = L.map(
+                "map_2ca6879b1afb9bd332594f3e8c2bc08f",
+                {
+                    center: [40.7831, -73.9712],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_71e24e2dda9c2eea52d1f78ec2e3d26c = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_71e24e2dda9c2eea52d1f78ec2e3d26c.addTo(map_2ca6879b1afb9bd332594f3e8c2bc08f);
+        
+    
+            var marker_018ad409f572bb10cc922b619c7d1958 = L.marker(
+                [40.645, -73.9449],
+                {}
+            ).addTo(map_2ca6879b1afb9bd332594f3e8c2bc08f);
+        
+    
+        var popup_fbd3b0a0aaa435bda61adf007da7a646 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_283adf7444394b7c39c6482923332c77 = $(`<div id="html_283adf7444394b7c39c6482923332c77" style="width: 100.0%; height: 100.0%;">Brooklyn</div>`)[0];
+                popup_fbd3b0a0aaa435bda61adf007da7a646.setContent(html_283adf7444394b7c39c6482923332c77);
+            
+        
+
+        marker_018ad409f572bb10cc922b619c7d1958.bindPopup(popup_fbd3b0a0aaa435bda61adf007da7a646)
+        ;
+
+        
+    
+    
+            var marker_653cf08258f4702b8a1a0b0352c91a9e = L.marker(
+                [40.767, -73.8364],
+                {}
+            ).addTo(map_2ca6879b1afb9bd332594f3e8c2bc08f);
+        
+    
+        var popup_8805aeba9b7dbb42eb32f2979221d2e8 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_35cae5b4730cf042dc99ab9b65c901b7 = $(`<div id="html_35cae5b4730cf042dc99ab9b65c901b7" style="width: 100.0%; height: 100.0%;">Manhattan</div>`)[0];
+                popup_8805aeba9b7dbb42eb32f2979221d2e8.setContent(html_35cae5b4730cf042dc99ab9b65c901b7);
+            
+        
+
+        marker_653cf08258f4702b8a1a0b0352c91a9e.bindPopup(popup_8805aeba9b7dbb42eb32f2979221d2e8)
+        ;
+
+        
+    
+    
+            var marker_bd7f775db8806774173959a0fb596078 = L.marker(
+                [40.6525, -73.8721],
+                {}
+            ).addTo(map_2ca6879b1afb9bd332594f3e8c2bc08f);
+        
+    
+        var popup_c5a179deb8cc5485339d7defe5065099 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e8303c2301534a93f788d1eb7bacbdf1 = $(`<div id="html_e8303c2301534a93f788d1eb7bacbdf1" style="width: 100.0%; height: 100.0%;">Queens</div>`)[0];
+                popup_c5a179deb8cc5485339d7defe5065099.setContent(html_e8303c2301534a93f788d1eb7bacbdf1);
+            
+        
+
+        marker_bd7f775db8806774173959a0fb596078.bindPopup(popup_c5a179deb8cc5485339d7defe5065099)
+        ;
+
+        
+    
+    
+            var marker_69d241fae17a5e06e9d6f45909cd73eb = L.marker(
+                [40.8517, -73.8412],
+                {}
+            ).addTo(map_2ca6879b1afb9bd332594f3e8c2bc08f);
+        
+    
+        var popup_5ba44f8b493113ec28ea1b1b47217d29 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_d0d12d179d3ba5da1ca0f202e5debd35 = $(`<div id="html_d0d12d179d3ba5da1ca0f202e5debd35" style="width: 100.0%; height: 100.0%;">Bronx</div>`)[0];
+                popup_5ba44f8b493113ec28ea1b1b47217d29.setContent(html_d0d12d179d3ba5da1ca0f202e5debd35);
+            
+        
+
+        marker_69d241fae17a5e06e9d6f45909cd73eb.bindPopup(popup_5ba44f8b493113ec28ea1b1b47217d29)
+        ;
+
+        
+    
+    
+            var marker_96222653b9158b176a4c21627a2c46a2 = L.marker(
+                [40.5641, -74.1467],
+                {}
+            ).addTo(map_2ca6879b1afb9bd332594f3e8c2bc08f);
+        
+    
+        var popup_36d25134c22f6872a359457b393941c9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f9172bd3ecf2c27feccf18e997e2b5e4 = $(`<div id="html_f9172bd3ecf2c27feccf18e997e2b5e4" style="width: 100.0%; height: 100.0%;">Staten Island</div>`)[0];
+                popup_36d25134c22f6872a359457b393941c9.setContent(html_f9172bd3ecf2c27feccf18e997e2b5e4);
+            
+        
+
+        marker_96222653b9158b176a4c21627a2c46a2.bindPopup(popup_36d25134c22f6872a359457b393941c9)
+        ;
+
+        
+    
+</script>
+</html>
